@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Bot, Mail, Lock, ArrowRight, Loader2, Building } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
+import { API_BASE_URL } from '@/lib/api'
 import Link from 'next/link'
 
 export default function SignupPage() {
@@ -39,7 +40,7 @@ export default function SignupPage() {
 
       // 2. Create company record via backend (uses service role key, bypasses RLS)
       try {
-        await fetch('http://localhost:8000/create-company', {
+        await fetch(`${API_BASE_URL}/create-company`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id: companyId, name: companyName })

@@ -6,6 +6,7 @@ import { Send, Bot, User, Loader2, Sparkles, Paperclip, ChevronRight } from 'luc
 import Navbar from '@/components/Navbar'
 import axios from 'axios'
 import { supabase } from '@/lib/supabase'
+import { API_BASE_URL } from '@/lib/api'
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([
@@ -34,7 +35,7 @@ export default function ChatPage() {
       const { data: { session } } = await supabase.auth.getSession()
       const companyId = session?.user?.user_metadata?.company_id || 'test-company'
 
-      const response = await axios.post('http://localhost:8000/chat', {
+      const response = await axios.post(`${API_BASE_URL}/chat`, {
         query: input,
         company_id: companyId
       })

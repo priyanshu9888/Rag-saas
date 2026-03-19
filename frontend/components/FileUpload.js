@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react'
 import { Upload, File, X, CheckCircle, Loader2 } from 'lucide-react'
 import axios from 'axios'
+import { API_BASE_URL } from '@/lib/api'
 import { supabase } from '@/lib/supabase'
 
 export default function FileUpload({ onUploadComplete }) {
@@ -31,7 +32,7 @@ export default function FileUpload({ onUploadComplete }) {
       formData.append('file', file)
       formData.append('company_id', companyId)
 
-      const response = await axios.post('http://localhost:8000/upload', formData, {
+      const response = await axios.post(`${API_BASE_URL}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

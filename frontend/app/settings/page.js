@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { Settings, Key, Cpu, CheckCircle, AlertCircle, Loader2, ChevronDown, ExternalLink } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import { supabase } from '@/lib/supabase'
+import { API_BASE_URL } from '@/lib/api'
 
 const PROVIDER_INFO = {
   google: {
@@ -60,8 +61,8 @@ export default function SettingsPage() {
 
       try {
         const [modelsRes, settingsRes] = await Promise.all([
-          fetch('http://localhost:8000/models'),
-          fetch(`http://localhost:8000/settings/${cid}`)
+          fetch(`${API_BASE_URL}/models`),
+          fetch(`${API_BASE_URL}/settings/${cid}`)
         ])
         const models = await modelsRes.json()
         const settings = await settingsRes.json()
@@ -88,7 +89,7 @@ export default function SettingsPage() {
     setSaving(true)
     setStatus(null)
     try {
-      const res = await fetch('http://localhost:8000/settings', {
+      const res = await fetch(`${API_BASE_URL}/settings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
