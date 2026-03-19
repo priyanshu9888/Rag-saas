@@ -3,6 +3,7 @@ uvicorn
 slowapi
 langchain
 langchain-google-genai
+langchain-groq
 langchain-community
 langchain-classic
 langchain-core
